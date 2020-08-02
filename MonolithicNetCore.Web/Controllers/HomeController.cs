@@ -1,25 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
+using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.Extensions.Logging;
 using MonolithicNetCore.Models;
+using MonolithicNetCore.Web.SignalHub;
+using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace MonolithicNetCore.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly IHubContext<HubServer> _hubServer;
+        private readonly IHubContext<LogServer> _hubLog;
+        public HomeController(ILogger<HomeController> logger, IHubContext<HubServer> hubServer, IHubContext<LogServer> hubLog)
         {
             _logger = logger;
+            _hubServer = hubServer;
+            _hubLog = hubLog;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            await _hubLog.Clients.Group("AdminLog").SendAsync("AdminLog", "Go to home page");
             return View();
         }
 

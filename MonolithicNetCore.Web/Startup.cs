@@ -26,6 +26,7 @@ using MonolithicNetCore.Data.Repository;
 using MonolithicNetCore.Service;
 using MonolithicNetCore.Web.ScheduleJob;
 using MonolithicNetCore.Web.ScheduleJob.Job;
+using MonolithicNetCore.Web.SignalHub;
 
 namespace MonolithicNetCore
 {
@@ -133,6 +134,9 @@ namespace MonolithicNetCore
                 jobType: typeof(BackUpDatabaseJob),
                 cronExpression: ConfigAppSetting.JobBackupTimeDriver)); // run every 5 seconds
             services.AddHostedService<QuartzHostedService>();
+
+            // Add hub server
+            services.AddSignalR();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -160,6 +164,8 @@ namespace MonolithicNetCore
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapHub<HubServer>("/hubserver");
+                endpoints.MapHub<LogServer>("/hublog");
             });
         }
     }
