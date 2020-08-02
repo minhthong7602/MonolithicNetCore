@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Google.Apis.Drive.v3" Version="1.48.0.1995" />
+    <PackageReference Include="Microsoft.AspNetCore.Hosting.Abstractions" Version="2.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MonolithicNetCore.Common\MonolithicNetCore.Common.csproj" />
+    <ProjectReference Include="..\MonolithicNetCore.Constant\MonolithicNetCore.Constant.csproj" />
+    <ProjectReference Include="..\MonolithicNetCore.Data\MonolithicNetCore.Data.csproj" />
+    <ProjectReference Include="..\MonolithicNetCore.Entity\MonolithicNetCore.Entity.csproj" />
+    <ProjectReference Include="..\MonolithicNetCore.Data\MonolithicNetCore.Data.csproj" />
+    <ProjectReference Include="..\MonolithicNetCore.Entity\MonolithicNetCore.Entity.csproj" />
+  </ItemGroup>
+
+</Project>
